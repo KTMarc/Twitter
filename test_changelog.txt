@@ -1,1 +1,3 @@
 Test Started
+Project running
+    Twitter signIn OK.
