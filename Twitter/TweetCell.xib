@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,30 +15,30 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qby-sP-QGV">
-                        <rect key="frame" x="9" y="8" width="45" height="62"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qby-sP-QGV">
+                        <rect key="frame" x="9" y="8" width="48" height="48"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="48" id="BHd-Rp-4aM"/>
                             <constraint firstAttribute="height" constant="48" id="VJy-6q-eag"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Tripta Gupta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-PX-zcR">
-                        <rect key="frame" x="65" y="12" width="91" height="16"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tripta Gupta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5vy-PX-zcR">
+                        <rect key="frame" x="65" y="13.5" width="71" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="@triptagupta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-Qx-MV5">
-                        <rect key="frame" x="100" y="11" width="91" height="18"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@triptagupta" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypc-Qx-MV5">
+                        <rect key="frame" x="141" y="13" width="74" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2 hrs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-1I-wxd">
-                        <rect key="frame" x="156" y="12" width="52" height="16"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hrs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-1I-wxd">
+                        <rect key="frame" x="220" y="13" width="28.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Test Tweet Test Tweet Test Tweet Test Tweet" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="vCe-gO-OwJ">
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Tweet Test Tweet Test Tweet Test Tweet" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="225" translatesAutoresizingMaskIntoConstraints="NO" id="vCe-gO-OwJ">
                         <rect key="frame" x="65" y="30" width="225" height="36"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="225" id="qvL-PH-eiG"/>
@@ -47,12 +48,16 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="yCJ-1I-wxd" firstAttribute="centerY" secondItem="5vy-PX-zcR" secondAttribute="centerY" id="5lj-WL-qwo"/>
                     <constraint firstItem="yCJ-1I-wxd" firstAttribute="leading" secondItem="ypc-Qx-MV5" secondAttribute="trailing" constant="5" id="8Fd-ID-iOZ"/>
                     <constraint firstItem="5vy-PX-zcR" firstAttribute="leading" secondItem="qby-sP-QGV" secondAttribute="trailing" constant="8" id="Du3-i3-cQb"/>
                     <constraint firstItem="vCe-gO-OwJ" firstAttribute="leading" secondItem="qby-sP-QGV" secondAttribute="trailing" constant="8" id="Wxs-Dz-pfO"/>
                     <constraint firstItem="qby-sP-QGV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="euc-W7-ii2"/>
                     <constraint firstItem="ypc-Qx-MV5" firstAttribute="leading" secondItem="5vy-PX-zcR" secondAttribute="trailing" constant="5" id="f9A-DX-vLj"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="vCe-gO-OwJ" secondAttribute="bottom" constant="18.5" id="gIM-bm-Q24"/>
                     <constraint firstItem="qby-sP-QGV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="gTY-4d-mTn"/>
+                    <constraint firstItem="vCe-gO-OwJ" firstAttribute="top" secondItem="5vy-PX-zcR" secondAttribute="bottom" constant="2" id="mzd-qB-Rc5"/>
+                    <constraint firstItem="ypc-Qx-MV5" firstAttribute="centerY" secondItem="5vy-PX-zcR" secondAttribute="centerY" id="zfk-mT-wGO"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
