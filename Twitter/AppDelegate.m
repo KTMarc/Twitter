@@ -12,6 +12,7 @@
 #import "TimelineViewController.h"
 #import "User.h"
 #import "MenuViewController.h"
+#import "MHSCoreDataStack.h"
 
 @implementation NSURL (dictionaryFromQueryString)
 
@@ -62,6 +63,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLogoutNotification object:nil];
 
+    MHSCoreDataStack *sharedCoreData = [[MHSCoreDataStack sharedInstance] coreDataStackWithModelName:@"Model"];
+    
     return YES;
 }
 
