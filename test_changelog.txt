@@ -1,3 +1,4 @@
 Test Started
 Project running
     Twitter signIn OK.
+I Will continue tomorrow with the Core Data implementation.
