@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B012AA4B07C4947A2521F87 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8CD23DA43F4B9A98D499A9 /* libPods.a */; };
+		4998E01E1CB18F2B00FDEE98 /* test_changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */; };
 		EB26124418F21977004FC7B9 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB26124218F21977004FC7B9 /* MenuViewController.m */; };
 		EB26124518F21977004FC7B9 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB26124318F21977004FC7B9 /* MenuViewController.xib */; };
 		EB31F97718E53EC600CBEA71 /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB31F97518E53EC600CBEA71 /* TimelineViewController.m */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		1038854C379247958CC5B9D1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_changelog.txt; sourceTree = SOURCE_ROOT; };
 		9C8CD23DA43F4B9A98D499A9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB26124118F21977004FC7B9 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		EB26124218F21977004FC7B9 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				EB9DBD3618E539FA0054D457 /* InfoPlist.strings */,
 				EB9DBD3918E539FA0054D457 /* main.m */,
 				EB9DBD3B18E539FA0054D457 /* Twitter-Prefix.pch */,
+				4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -299,7 +302,7 @@
 		EB9DBD2218E539FA0054D457 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Tripta Gupta";
 				TargetAttributes = {
 					EB9DBD4418E539FA0054D457 = {
@@ -339,6 +342,7 @@
 				EB9DBD7418E53C890054D457 /* ComposeViewController.xib in Resources */,
 				EBEE9A5D18E87E720088D030 /* LoginViewController.xib in Resources */,
 				EB9DBD6A18E53BF40054D457 /* TweetCell.xib in Resources */,
+				4998E01E1CB18F2B00FDEE98 /* test_changelog.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +465,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -522,6 +527,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Twitter/Twitter-Prefix.pch";
 				INFOPLIST_FILE = "Twitter/Twitter-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.triptagupta.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -536,6 +542,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Twitter/Twitter-Prefix.pch";
 				INFOPLIST_FILE = "Twitter/Twitter-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.triptagupta.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -557,6 +564,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TwitterTests/TwitterTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.triptagupta.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -575,6 +583,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Twitter/Twitter-Prefix.pch";
 				INFOPLIST_FILE = "TwitterTests/TwitterTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.triptagupta.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
