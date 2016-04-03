@@ -103,6 +103,10 @@
         NSLog(@"%@", error);
     }];
     
+    if (indexPath.row == [self.tweets count] - 1)
+    {
+        [self loadMoreTweets];
+    }
     return cell;
 }
 
@@ -125,18 +129,54 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Selected row %d", indexPath.row);
+    NSLog(@"Selected row %ld", (long)indexPath.row);
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     Tweet *tweet = self.tweets[indexPath.row];
     
     TweetViewController *tvc = [[TweetViewController alloc] initWithNibName:@"TweetViewController" andModel:tweet bundle:nil];
     
     UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController: tvc];
+    
+    
     [self presentViewController:navigationVC animated:YES completion:nil];
+    
+    //[navigationVC pushViewController:tvc animated:YES];
     
 }
 
 #pragma mark - Private methods
+
+- (void) loadMoreTweets {
+    if (self.showMentions) {
+        // Getting mentions from API
+        [[TwitterClient instance] mentionsWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"Loading more tweets");
+            
+            // Initializing tweet model with array of json
+            [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            [self setTitle:@"Mentions"];
+            
+            [self.tableView reloadData];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"No one loves you enough to mention you!");
+        }];
+    } else {
+        // Getting last 20 tweets from home timeline API
+        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+            NSLog(@"You've go the best json I've ever seen: %@", response);
+            
+            // Initializing tweet model with array of json
+            [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            [self setTitle:@"Home"];
+            NSLog(@"Loading more tweets without mentions");
+            
+            [self.tableView reloadData];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"You've been very bad. No tweets for you!");
+        }];
+    }
+    
+}
 
 - (void)reload
 {

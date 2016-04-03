@@ -59,7 +59,7 @@ static User *currentUser = nil;
     _data = dictionary;
     
     if ([dictionary isKindOfClass:[NSDictionary class]]){
-        NSLog(@"dictionary is a real dictionary!!!");
+        //NSLog(@"dictionary is a real dictionary!!!");
         _name              = dictionary[@"name"];
         _profile_image_url = dictionary[@"profile_image_url"];
         _screen_name       = dictionary[@"screen_name"];
