@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B012AA4B07C4947A2521F87 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8CD23DA43F4B9A98D499A9 /* libPods.a */; };
+		4997FDD51CB1ABD600B07560 /* Qube.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4997FDD41CB1AAA000B07560 /* Qube.ttf */; };
 		4998E01E1CB18F2B00FDEE98 /* test_changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */; };
 		4998E0231CB1A74100FDEE98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4998E0211CB1A74100FDEE98 /* Model.xcdatamodeld */; };
 		4998E0261CB1A96600FDEE98 /* MHSCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 4998E0241CB1A96600FDEE98 /* MHSCoreDataStack.m */; };
@@ -54,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		1038854C379247958CC5B9D1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4997FDD41CB1AAA000B07560 /* Qube.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Qube.ttf; sourceTree = "<group>"; };
 		4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_changelog.txt; sourceTree = SOURCE_ROOT; };
 		4998E0221CB1A74100FDEE98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		4998E0241CB1A96600FDEE98 /* MHSCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSCoreDataStack.m; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 		EB9DBD3418E539FA0054D457 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				4997FDD41CB1AAA000B07560 /* Qube.ttf */,
 				EB9DBD3518E539FA0054D457 /* Twitter-Info.plist */,
 				4998E0211CB1A74100FDEE98 /* Model.xcdatamodeld */,
 				EB9DBD3618E539FA0054D457 /* InfoPlist.strings */,
@@ -348,6 +351,7 @@
 				EB26124518F21977004FC7B9 /* MenuViewController.xib in Resources */,
 				EB31F97818E53EC600CBEA71 /* TimelineViewController.xib in Resources */,
 				EB9DBD7418E53C890054D457 /* ComposeViewController.xib in Resources */,
+				4997FDD51CB1ABD600B07560 /* Qube.ttf in Resources */,
 				EBEE9A5D18E87E720088D030 /* LoginViewController.xib in Resources */,
 				EB9DBD6A18E53BF40054D457 /* TweetCell.xib in Resources */,
 				4998E01E1CB18F2B00FDEE98 /* test_changelog.txt in Resources */,

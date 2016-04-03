@@ -63,7 +63,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLogoutNotification object:nil];
 
-    MHSCoreDataStack *sharedCoreData = [[MHSCoreDataStack sharedInstance] coreDataStackWithModelName:@"Model"];
+    //MHSCoreDataStack *sharedCoreData = [[MHSCoreDataStack sharedInstance] coreDataStackWithModelName:@"Model"];
     
     return YES;
 }

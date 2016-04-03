@@ -85,7 +85,9 @@
     
     // Setting cell data from Tweet object
     cell.statusLabel.text = tweet.tweet_text;
+    cell.statusLabel.font = [UIFont fontWithName:@"Qube" size:16];
     cell.nameLabel.text = tweet.name;
+    
     cell.twitterHandleLabel.text = tweet.twitter_handle;
     cell.timeStampLabel.text = tweet.relative_timestamp;
     

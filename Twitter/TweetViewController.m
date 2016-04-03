@@ -46,6 +46,7 @@
     [super viewDidLoad];
     
     self.tweetStatusLabel.text = currentTweet.tweet_text;
+    self.tweetStatusLabel.font = [UIFont fontWithName:@"Qube" size:16];
     self.nameLabel.text = currentTweet.name;
     self.userNameLabel.text = currentTweet.twitter_handle;
     self.timestampLabel.text = currentTweet.timestamp;
