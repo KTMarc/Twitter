@@ -16,6 +16,7 @@
 #import "ProfileViewController.h"
 #import "MenuViewController.h"
 #import "MHSCoreDataStack.h"
+#import <NSDate+TimeAgo.h>
 
 @interface TimelineViewController () <UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate>
 
@@ -85,19 +86,19 @@
 
 }
 
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTweet entityName]];
-    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTweetAttributes.name
-                                                          ascending:YES]];
-    
-    NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
-                                                                              managedObjectContext:_model.context
-                                                                                sectionNameKeyPath:nil
-                                                                                         cacheName:nil];
-    self.fetchedResultsController = results;
-}
+//-(void) viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//    
+//    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTweet entityName]];
+//    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTweetAttributes.timestamp
+//                                                          ascending:YES]];
+//    
+//    NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
+//                                                                              managedObjectContext:_model.context
+//                                                                                sectionNameKeyPath:nil
+//                                                                                         cacheName:nil];
+//    self.fetchedResultsController = results;
+//}
 
 #pragma mark - Table view data source
 
@@ -138,7 +139,7 @@
     cell.nameLabel.text = tweet.name;
     
     cell.twitterHandleLabel.text = tweet.twitter_handle;
-    //cell.timeStampLabel.text = tweet.relative_timestamp;
+    cell.timeStampLabel.text = [self relativeTimestampWithDate:tweet.timestamp];
     
     //tap on profile for ProfileViewController
     UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileOnTap:)];
@@ -156,7 +157,7 @@
     
     if (indexPath.row == [self.tweets count] - 1)
     {
-        [self loadMoreTweets];
+        //[self loadMoreTweets];
     }
     return cell;
 }
@@ -213,14 +214,14 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:[MHSTweet entityName] inManagedObjectContext:self.model.context];
         [fetchRequest setEntity:entity];
         
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: MHSTweetAttributes.name ascending:YES];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: MHSTweetAttributes.timestamp ascending:YES];
         NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
         [fetchRequest setSortDescriptors:sortDescriptors];
         
         NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                               managedObjectContext:self.model.context
                                                                                 sectionNameKeyPath:nil
-                                                                                         cacheName:@"Tweet"];
+                                                                                         cacheName:nil];
         frc.delegate = self;
         self.fetchedResultsController = frc;
         
@@ -275,52 +276,90 @@
 
 - (void)reload
 {
-    if (self.showMentions) {
-        // Getting mentions from API
-        [[TwitterClient instance] mentionsWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
-            NSLog(@"You've been mentioned by people: %@", response);
-            
-            // Initializing tweet model with array of json
-            self.tweets = [Tweet tweetsWithArray:response];
-            [self setTitle:@"Mentions"];
-            
-            //Saving to Core Data
-            [MHSTweet tweetsWithArray:response context:self.model.context];
-            [self.model saveWithErrorBlock:^(NSError *error) {
-                NSLog(@"Error saving %s \n\n %@", __func__, error);
+    //Set the flag for loaded Data
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *hasData = [defaults objectForKey:@"hasData"];
+    NSLog(@"HasData:%@", hasData);
+    
+    
+    if ([hasData isEqualToString:@"no"] || (hasData == nil)){
+        NSLog(@"There is no data from previous executions, loading from network..");
+        
+        if (self.showMentions) {
+            // Getting mentions from API
+            [[TwitterClient instance] mentionsWithSuccess:^(AFHTTPRequestOperation *operation, id response) {
+                //NSLog(@"You've been mentioned by people: %@", response);
+                
+                // Initializing tweet model with array of json
+                self.tweets = [Tweet tweetsWithArray:response];
+                [self setTitle:@"Mentions"];
+                //[[self navigationController] setTitle:@"Mentions"];
+                
+                //Saving to Core Data
+                [MHSTweet tweetsWithArray:response context:self.model.context];
+                NSLog(@"Saved tweets in CORE DATA");
+                
+                [self.model saveWithErrorBlock:^(NSError *error) {
+                    NSLog(@"Error saving %s \n\n %@", __func__, error);
+                }];
+                
+                [defaults setObject:@"yes" forKey:@"hasData"];
+                [defaults synchronize];
+                
+                [self.tableView reloadData];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"No one loves you enough to mention you!");
             }];
-            
-            [self.tableView reloadData];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"No one loves you enough to mention you!");
-        }];
+        } else {
+            // Getting last 20 tweets from home timeline API
+            [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
+                //NSLog(@"You've go the best json I've ever seen: %@", response);
+                
+                // Initializing tweet model with array of json
+                self.tweets = [Tweet tweetsWithArray:response];
+                [self setTitle:@"Home"];
+                //[[self navigationController] setTitle:@"Home"];
+                
+                //Saving to Core Data
+                [MHSTweet tweetsWithArray:response context:self.model.context];
+                NSLog(@"Saved tweets in CORE DATA");
+                [self.model saveWithErrorBlock:^(NSError *error) {
+                    NSLog(@"Error saving %s \n\n %@", __func__, error);
+                }];
+                
+                [defaults setObject:@"yes" forKey:@"hasData"];
+                [defaults synchronize];
+                
+                [self.tableView reloadData];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"You've been very bad. No tweets for you!");
+            }];
+        }
     } else {
-        // Getting last 20 tweets from home timeline API
-        [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-            NSLog(@"You've go the best json I've ever seen: %@", response);
-            
-            // Initializing tweet model with array of json
-            self.tweets = [Tweet tweetsWithArray:response];
-            [self setTitle:@"Home"];
-            //Saving to Core Data
-            [MHSTweet tweetsWithArray:response context:self.model.context];
-            [self.model saveWithErrorBlock:^(NSError *error) {
-                NSLog(@"Error saving %s \n\n %@", __func__, error);
-            }];
-            
-            [self.tableView reloadData];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"You've been very bad. No tweets for you!");
-        }];
+        NSLog(@"We have data from previous executions, loading from CORE DATA..");
+
     }
 }
 
 - (void)refreshView
 {
-    NSLog(@"refreshing view");
+    NSLog(@"refreshing view deleting everything in the cache");
+    
+    [self.model zapAllData]; //Should call a callback to know when deleting ends.
+    self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"no" forKey:@"hasData"];
+    [defaults synchronize];
+    
     [[TwitterClient instance] homeTimelineWithCount:20 sinceId:0 maxId:0 success:^(AFHTTPRequestOperation *operation, id response) {
-        NSLog(@"%@", response);
-        self.tweets = [Tweet tweetsWithArray:response];
+        //NSLog(@"%@", response);
+        
+        //Saving to Core Data
+        [MHSTweet tweetsWithArray:response context:self.model.context];
+        [self.model saveWithErrorBlock:^(NSError *error) {
+            NSLog(@"Error saving %s \n\n %@", __func__, error);
+        }];
+        
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"!");
@@ -355,6 +394,15 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (NSString *)relativeTimestampWithDate: (NSString *)date
+{
+    NSDateFormatter *datefformat = [[NSDateFormatter alloc] init];
+    [datefformat setDateFormat:@"EEE MMM dd HH:mm:ss Z yyyy"];
+    [datefformat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    NSDate *tweetDate = [datefformat dateFromString:date];
+    return [tweetDate timeAgo];
 }
 
 

@@ -1,4 +1,6 @@
 #import "MHSTweet.h"
+#import <NSDate+TimeAgo.h>
+
 
 @interface MHSTweet ()
 
@@ -25,6 +27,7 @@
     tw.favoriteCount      = dictionary[@"favorite_count"]; //Int
     tw.retweetCount       = dictionary[@"retweet_count"]; //Int
     
+    
     return tw;
 }
 
@@ -40,5 +43,13 @@
     return tweets;
 }
 
+//- (NSString *)relative_timestamp
+//{
+//    NSDateFormatter *datefformat = [[NSDateFormatter alloc] init];
+//    [datefformat setDateFormat:@"EEE MMM dd HH:mm:ss Z yyyy"];
+//    [datefformat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//    NSDate *tweetDate = [datefformat dateFromString:self.timestamp];
+//    return [tweetDate timeAgo];
+//}
 
 @end

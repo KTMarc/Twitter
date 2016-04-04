@@ -4,6 +4,8 @@
 
 @interface MHSTweet : _MHSTweet
 
+//@property (nonatomic, strong) NSString *relative_timestamp;
+
 -(id) initWithDictionary:(NSDictionary *)dictionary
                          context:(NSManagedObjectContext *) context;
 
