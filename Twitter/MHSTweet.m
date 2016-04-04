@@ -9,7 +9,7 @@
 @implementation MHSTweet
 
 // Custom logic goes here.
-+(instancetype) tweetWithDictionary:(NSDictionary *)dictionary
+-(id) initWithDictionary:(NSDictionary *)dictionary
                            context:(NSManagedObjectContext *) context{
     
     MHSTweet *tw = [NSEntityDescription insertNewObjectForEntityForName:[MHSTweet entityName]
@@ -22,13 +22,23 @@
     tw.twitter_handle     = dictionary[@"user"][@"screen_name"];
     tw.name               = dictionary[@"user"][@"name"];
     tw.timestamp          = dictionary[@"created_at"];
-    tw.favoriteCount      = dictionary[@"favorite_count"];
-    tw.retweetCount       = dictionary[@"retweet_count"];
+    tw.favoriteCount      = dictionary[@"favorite_count"]; //Int
+    tw.retweetCount       = dictionary[@"retweet_count"]; //Int
     
     return tw;
 }
 
-
++ (NSMutableArray *)tweetsWithArray:(NSArray *)array
+                            context:(NSManagedObjectContext *) context
+{
+    NSLog(@"Starting tweetsWithArray");
+    NSMutableArray *tweets = [[NSMutableArray alloc] initWithCapacity:array.count];
+    
+    for (NSDictionary *dictionary in array) {
+        [tweets addObject:[[MHSTweet alloc] initWithDictionary:dictionary context:context]];
+    }
+    return tweets;
+}
 
 
 @end

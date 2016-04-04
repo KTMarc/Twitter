@@ -72,7 +72,12 @@
     
     
    // MHSCoreDataStack *sharedCoreData = [MHSCoreDataStack sharedInstance];
-    [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+    self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+    // Returns the URL to the application's Documents directory.
+    
+    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
+        
+    
 
 }
 
@@ -197,6 +202,12 @@
             self.tweets = [Tweet tweetsWithArray:response];
             [self setTitle:@"Mentions"];
             
+            //Saving to Core Data
+            [MHSTweet tweetsWithArray:response context:self.model.context];
+            [self.model saveWithErrorBlock:^(NSError *error) {
+                NSLog(@"Error saving %s \n\n %@", __func__, error);
+            }];
+            
             [self.tableView reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"No one loves you enough to mention you!");
@@ -209,6 +220,11 @@
             // Initializing tweet model with array of json
             self.tweets = [Tweet tweetsWithArray:response];
             [self setTitle:@"Home"];
+            //Saving to Core Data
+            [MHSTweet tweetsWithArray:response context:self.model.context];
+            [self.model saveWithErrorBlock:^(NSError *error) {
+                NSLog(@"Error saving %s \n\n %@", __func__, error);
+            }];
             
             [self.tableView reloadData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -258,5 +274,7 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+
 
 @end

@@ -39,6 +39,11 @@
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
 		return keyPaths;
 	}
+	if ([key isEqualToString:@"tweet_idValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"tweet_id"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+		return keyPaths;
+	}
 
 	return keyPaths;
 }
@@ -90,6 +95,24 @@
 @dynamic timestamp;
 
 @dynamic tweet_id;
+
+- (int16_t)tweet_idValue {
+	NSNumber *result = [self tweet_id];
+	return [result shortValue];
+}
+
+- (void)setTweet_idValue:(int16_t)value_ {
+	[self setTweet_id:@(value_)];
+}
+
+- (int16_t)primitiveTweet_idValue {
+	NSNumber *result = [self primitiveTweet_id];
+	return [result shortValue];
+}
+
+- (void)setPrimitiveTweet_idValue:(int16_t)value_ {
+	[self setPrimitiveTweet_id:@(value_)];
+}
 
 @dynamic tweet_text;
 

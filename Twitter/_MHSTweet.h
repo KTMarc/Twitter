@@ -32,7 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong, nullable) NSString* timestamp;
 
-@property (nonatomic, strong, nullable) NSString* tweet_id;
+@property (nonatomic, strong, nullable) NSNumber* tweet_id;
+
+@property (atomic) int16_t tweet_idValue;
+- (int16_t)tweet_idValue;
+- (void)setTweet_idValue:(int16_t)value_;
 
 @property (nonatomic, strong, nullable) NSString* tweet_text;
 
@@ -65,8 +69,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString*)primitiveTimestamp;
 - (void)setPrimitiveTimestamp:(NSString*)value;
 
-- (NSString*)primitiveTweet_id;
-- (void)setPrimitiveTweet_id:(NSString*)value;
+- (NSNumber*)primitiveTweet_id;
+- (void)setPrimitiveTweet_id:(NSNumber*)value;
+
+- (int16_t)primitiveTweet_idValue;
+- (void)setPrimitiveTweet_idValue:(int16_t)value_;
 
 - (NSString*)primitiveTweet_text;
 - (void)setPrimitiveTweet_text:(NSString*)value;

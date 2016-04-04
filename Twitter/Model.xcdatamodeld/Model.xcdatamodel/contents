@@ -6,7 +6,7 @@
         <attribute name="profile_image_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="retweetCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="tweet_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tweet_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="tweet_text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="twitter_handle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>

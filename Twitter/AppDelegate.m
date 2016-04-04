@@ -63,6 +63,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLoginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateRootViewController) name:UserDidLogoutNotification object:nil];
 
+    self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
     
     
     return YES;
@@ -168,7 +169,7 @@
         _menuViewController.toolbarHidden = NO;
         
         // Hide navigation bar
-        _menuViewController.navigationBarHidden = YES;
+        _menuViewController.navigationBarHidden = NO;
     }
     
     return _menuViewController;
@@ -180,6 +181,28 @@
     }
     else {
         return self.loginViewController;
+    }
+}
+
+#pragma mark - CORE DATA Utils
+
+
+-(void)save{
+    
+    [self.model saveWithErrorBlock:^(NSError *error) {
+        NSLog(@"Error saving %s \n\n %@", __func__, error);
+    }];
+}
+
+-(void)autoSave{
+    
+    if (AUTO_SAVE) {
+        NSLog(@"Autosaving....");
+        
+        [self save];
+        [self performSelector:@selector(autoSave)
+                   withObject:nil
+                   afterDelay:AUTO_SAVE_DELAY_IN_SECONDS];
     }
 }
 @end

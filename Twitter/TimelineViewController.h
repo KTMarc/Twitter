@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MHSCoreDataStack.h"
+#import "MHSTweet.h"
 
 @interface TimelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) MHSCoreDataStack *model;
 
 - (id)initWithShowMentions:(BOOL)showMentions;
 
