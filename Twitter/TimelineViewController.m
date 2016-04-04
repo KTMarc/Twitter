@@ -167,7 +167,8 @@
         NSLog(@"%@", error);
     }];
     
-    if (indexPath.row == [self.tweets count] - 1)
+    
+    if (indexPath.row == [self.fetchedResultsController.fetchedObjects count] - 1)
     {
         [self loadMoreTweets];
     }
