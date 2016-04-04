@@ -17,12 +17,18 @@
 #import "MenuViewController.h"
 #import "MHSCoreDataStack.h"
 
-@interface TimelineViewController () <UIGestureRecognizerDelegate>
+@interface TimelineViewController () <UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (assign, nonatomic) BOOL showMentions;
+
+//CORE DATA
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+//@property (strong, nonatomic) NSNumberFormatter *decimalFormatter;
+//@property (strong, nonatomic) NSArray *filteredList;
+@property (strong, nonatomic) NSFetchRequest *searchFetchRequest;
 
 //- (void)onSignOutButton;
 - (void)reload;
@@ -75,24 +81,56 @@
     self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
     // Returns the URL to the application's Documents directory.
     
-    NSLog(@"%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
-        
-    
+    NSLog(@"Core data path:%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
 
+}
+
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTweet entityName]];
+    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTweetAttributes.name
+                                                          ascending:YES]];
+    
+    NSFetchedResultsController *results = [[NSFetchedResultsController alloc] initWithFetchRequest:req
+                                                                              managedObjectContext:_model.context
+                                                                                sectionNameKeyPath:nil
+                                                                                         cacheName:nil];
+    self.fetchedResultsController = results;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.tweets.count;
+//    if (self.searchController.active)
+//    {
+//        return [self.filteredList count];
+//    }
+//    else
+//    {
+        id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+//    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"TweetCell";
     TweetCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    Tweet *tweet = [self.tweets objectAtIndex:indexPath.row];
+    
+    MHSTweet *tweet;
+//    if (self.searchController.active)
+//    {
+//        country = [self.filteredList objectAtIndex:indexPath.row];
+//    }
+//    else
+//    {
+        tweet  = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    }
+    
+    //Tweet *tweet = [self.tweets objectAtIndex:indexPath.row];
+
     
     // Setting cell data from Tweet object
     cell.statusLabel.text = tweet.tweet_text;
@@ -100,7 +138,7 @@
     cell.nameLabel.text = tweet.name;
     
     cell.twitterHandleLabel.text = tweet.twitter_handle;
-    cell.timeStampLabel.text = tweet.relative_timestamp;
+    //cell.timeStampLabel.text = tweet.relative_timestamp;
     
     //tap on profile for ProfileViewController
     UITapGestureRecognizer *tapgesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(profileOnTap:)];
@@ -125,8 +163,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Tweet *tweet = self.tweets[indexPath.row];
-    
+    //Tweet *tweet = self.tweets[indexPath.row];
+    MHSTweet *tweet  = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
     NSString *text = tweet.tweet_text;
     UIFont *fontText = [UIFont systemFontOfSize:15.0];
     CGRect rect = [text boundingRectWithSize:CGSizeMake(235, CGFLOAT_MAX)
@@ -155,6 +194,49 @@
     
     //[navigationVC pushViewController:tvc animated:YES];
     
+}
+
+#pragma mark -
+#pragma mark === Fetched Results Controller ===
+#pragma mark -
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil)
+    {
+        return _fetchedResultsController;
+    }
+    
+    if (self.model.context)
+    {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:[MHSTweet entityName] inManagedObjectContext:self.model.context];
+        [fetchRequest setEntity:entity];
+        
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: MHSTweetAttributes.name ascending:YES];
+        NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+        NSFetchedResultsController *frc = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                              managedObjectContext:self.model.context
+                                                                                sectionNameKeyPath:nil
+                                                                                         cacheName:@"Tweet"];
+        frc.delegate = self;
+        self.fetchedResultsController = frc;
+        
+        NSError *error = nil;
+        if (![self.fetchedResultsController performFetch:&error])
+        {
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        }
+    }
+    
+    return _fetchedResultsController;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Private methods
