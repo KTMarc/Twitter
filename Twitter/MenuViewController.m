@@ -82,6 +82,9 @@
     [self.containerView addSubview:profileView];
     [self.containerView addSubview:mentionsView];
     [self.containerView addSubview:timelineView];
+    
+    //NSLog(@"Description of Nav Controller in MenuVC: %@",[self.navigationController description]);
+
 }
 
 - (void)onPan:(UIPanGestureRecognizer *)panGestureRecognizer

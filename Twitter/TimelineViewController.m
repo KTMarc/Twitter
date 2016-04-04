@@ -65,7 +65,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+ 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -83,7 +83,7 @@
     // Returns the URL to the application's Documents directory.
     
     NSLog(@"Core data path:%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
-
+    
 }
 
 //-(void) viewWillAppear:(BOOL)animated{
@@ -184,17 +184,19 @@
 {
     NSLog(@"Selected row %ld", (long)indexPath.row);
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Tweet *tweet = self.tweets[indexPath.row];
+    //Tweet *tweet = self.tweets[indexPath.row];
+    
+    MHSTweet *tweet  = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     TweetViewController *tvc = [[TweetViewController alloc] initWithNibName:@"TweetViewController" andModel:tweet bundle:nil];
     
-    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController: tvc];
     
-    
-    [self presentViewController:navigationVC animated:YES completion:nil];
-    
-    //[navigationVC pushViewController:tvc animated:YES];
-    
+//    UINavigationController *navigationVC = [[UINavigationController alloc] initWithRootViewController: self];
+//    
+//    [self presentViewController:navigationVC animated:YES completion:nil];
+//    
+    [self.navigationController pushViewController:tvc animated:YES];
+
 }
 
 #pragma mark -
@@ -249,7 +251,12 @@
             NSLog(@"Loading more tweets");
             
             // Initializing tweet model with array of json
-            [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            //[self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            
+            //Saving to Core Data
+            [MHSTweet tweetsWithArray:response context:self.model.context];
+            NSLog(@"Loading more tweets from the network and saving to CORE DATA");
+            
             [self setTitle:@"Mentions"];
             
             [self.tableView reloadData];
@@ -262,7 +269,12 @@
             NSLog(@"You've go the best json I've ever seen: %@", response);
             
             // Initializing tweet model with array of json
-            [self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            //[self.tweets arrayByAddingObjectsFromArray:[Tweet tweetsWithArray:response]];
+            
+            //Saving to Core Data
+            [MHSTweet tweetsWithArray:response context:self.model.context];
+            NSLog(@"Loading more tweets from the network and saving to CORE DATA");
+            
             [self setTitle:@"Home"];
             NSLog(@"Loading more tweets without mentions");
             
@@ -291,7 +303,7 @@
                 //NSLog(@"You've been mentioned by people: %@", response);
                 
                 // Initializing tweet model with array of json
-                self.tweets = [Tweet tweetsWithArray:response];
+                //self.tweets = [Tweet tweetsWithArray:response];
                 [self setTitle:@"Mentions"];
                 //[[self navigationController] setTitle:@"Mentions"];
                 
@@ -316,7 +328,7 @@
                 //NSLog(@"You've go the best json I've ever seen: %@", response);
                 
                 // Initializing tweet model with array of json
-                self.tweets = [Tweet tweetsWithArray:response];
+                //self.tweets = [Tweet tweetsWithArray:response];
                 [self setTitle:@"Home"];
                 //[[self navigationController] setTitle:@"Home"];
                 
@@ -345,8 +357,10 @@
 {
     NSLog(@"refreshing view deleting everything in the cache");
     
-    [self.model zapAllData]; //Should call a callback to know when deleting ends.
-    self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+//    [self.model zapAllData]; //Should call a callback to know when deleting ends.
+//    self.model = [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+//    
+    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@"no" forKey:@"hasData"];
     [defaults synchronize];

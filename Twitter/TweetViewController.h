@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Tweet.h"
+#import "MHSTweet.h"
 
 @interface TweetViewController : UIViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil andModel:(Tweet *)tweet bundle:(NSBundle *)nibBundleOrNil;
+- (id)initWithNibName:(NSString *)nibNameOrNil andModel:(MHSTweet *)tweet bundle:(NSBundle *)nibBundleOrNil;
 
 @end

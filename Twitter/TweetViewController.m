@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
-@property (nonatomic, weak) Tweet *currentTweet;
+@property (nonatomic, weak) MHSTweet *currentTweet;
 
 - (IBAction)onReply:(id)sender;
 - (IBAction)onRetweet:(id)sender;
@@ -32,7 +32,7 @@
 
 @synthesize currentTweet;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil andModel:(Tweet *)tweet bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil andModel:(MHSTweet *)tweet bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -60,7 +60,9 @@
     
     // Adding Buttons to Navigation Bar
     self.navigationItem.title = @"Tweet";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButton)];
+    //self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(onCancelButton)];
+    
+    
 }
 
 - (void)onCancelButton
