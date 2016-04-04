@@ -15,10 +15,11 @@ API:
 TODO: Implementation should check for exisiting tweets in core data via the tweet_id.
 
 UI+API:
--Add a search bar: Not Done.
-TODO:I would add a UISearchBar and its delegates. Then create a new API call (Example from twitter API:
-https://api.twitter.com/1.1/search/tweets.json?q=%40twitterapi)
+-Add a search bar: Half done.
+-I did the implementatation of the new API call and I'm printing in the console the results of the search term "Obama".
+TODO:I would add a UISearchBar and its delegates.
 The right way to do it would be creating another Core Data Stack that we only use to get the list of matches while the user writes on the search field. Reactive COCOA could be a good framework to work on this. The keystrokes would be the signals that generate new requests.
+
 
 
 Core Data:

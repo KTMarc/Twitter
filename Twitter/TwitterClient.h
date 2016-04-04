@@ -30,6 +30,9 @@
                                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (AFHTTPRequestOperation *) searchTweetsWithTextToSearch: (NSString *) textQuery
+                                                  Success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 //Status API
 

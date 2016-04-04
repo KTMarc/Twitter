@@ -84,11 +84,23 @@
     
     NSLog(@"Core data path:%@",[[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory  inDomains:NSUserDomainMask] lastObject]);
     
+    //Example of search call to API
+    [[TwitterClient instance] searchTweetsWithTextToSearch:@"Obama" Success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+        NSLog(@"------\nRESULTS FROM SEARCH EXAMPLE:%@\n------\n", responseObject);
+    
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"You've been very bad. No tweets for you!");
+    }];
+    
+
+    
 }
 
 //-(void) viewWillAppear:(BOOL)animated{
 //    [super viewWillAppear:animated];
-//    
+//
 //    NSFetchRequest *req = [NSFetchRequest fetchRequestWithEntityName:[MHSTweet entityName]];
 //    req.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:MHSTweetAttributes.timestamp
 //                                                          ascending:YES]];

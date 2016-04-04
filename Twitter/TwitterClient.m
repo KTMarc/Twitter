@@ -120,12 +120,28 @@
 }
 
 
+
 //Tweets of Mentions
 
 - (AFHTTPRequestOperation *) mentionsWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     return [self GET:@"1.1/statuses/mentions_timeline.json" parameters:nil success:success failure:failure];
 }
+
+- (AFHTTPRequestOperation *) searchTweetsWithTextToSearch: (NSString *) textQuery
+                                                  Success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    /** Example from API
+     https://api.twitter.com/1.1/search/tweets.json?q=%40twitterapi
+     */
+    
+    NSString *path = [NSString stringWithFormat:@"https://api.twitter.com/1.1/search/tweets.json?q=%@.json", textQuery];
+    return [self GET: path parameters:nil success:success failure:failure];
+
+}
+
+
+
 
 
 @end
