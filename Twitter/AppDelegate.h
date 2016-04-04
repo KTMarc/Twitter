@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class MHSCoreDataStack;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) MHSCoreDataStack *model;
+
 
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3B012AA4B07C4947A2521F87 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C8CD23DA43F4B9A98D499A9 /* libPods.a */; };
+		497563101CB259D100900BB8 /* _MHSTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975630D1CB259D100900BB8 /* _MHSTweet.m */; };
+		497563111CB259D100900BB8 /* MHSTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = 4975630F1CB259D100900BB8 /* MHSTweet.m */; };
 		4997FDD51CB1ABD600B07560 /* Qube.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4997FDD41CB1AAA000B07560 /* Qube.ttf */; };
 		4998E01E1CB18F2B00FDEE98 /* test_changelog.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */; };
 		4998E0231CB1A74100FDEE98 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4998E0211CB1A74100FDEE98 /* Model.xcdatamodeld */; };
@@ -55,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		1038854C379247958CC5B9D1 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4975630C1CB259D100900BB8 /* _MHSTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MHSTweet.h; sourceTree = "<group>"; };
+		4975630D1CB259D100900BB8 /* _MHSTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MHSTweet.m; sourceTree = "<group>"; };
+		4975630E1CB259D100900BB8 /* MHSTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHSTweet.h; sourceTree = "<group>"; };
+		4975630F1CB259D100900BB8 /* MHSTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHSTweet.m; sourceTree = "<group>"; };
 		4997FDD41CB1AAA000B07560 /* Qube.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Qube.ttf; sourceTree = "<group>"; };
 		4998E01D1CB18F2B00FDEE98 /* test_changelog.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_changelog.txt; sourceTree = SOURCE_ROOT; };
 		4998E0221CB1A74100FDEE98 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -131,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		497563121CB259E200900BB8 /* Machine */ = {
+			isa = PBXGroup;
+			children = (
+				4975630C1CB259D100900BB8 /* _MHSTweet.h */,
+				4975630D1CB259D100900BB8 /* _MHSTweet.m */,
+			);
+			name = Machine;
+			sourceTree = "<group>";
+		};
 		EB9DBD2118E539FA0054D457 = {
 			isa = PBXGroup;
 			children = (
@@ -217,8 +232,11 @@
 				EB9DBD6118E53BC50054D457 /* User.m */,
 				EB9DBD6318E53BD10054D457 /* Tweet.h */,
 				EB9DBD6418E53BD10054D457 /* Tweet.m */,
+				4975630E1CB259D100900BB8 /* MHSTweet.h */,
+				4975630F1CB259D100900BB8 /* MHSTweet.m */,
 				4998E0241CB1A96600FDEE98 /* MHSCoreDataStack.m */,
 				4998E0251CB1A96600FDEE98 /* MHSCoreDataStack.h */,
+				497563121CB259E200900BB8 /* Machine */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -407,10 +425,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB9DBD6E18E53C270054D457 /* TweetViewController.m in Sources */,
+				497563101CB259D100900BB8 /* _MHSTweet.m in Sources */,
 				EB31F97718E53EC600CBEA71 /* TimelineViewController.m in Sources */,
 				EBF1107C18E75CA400CD9D9D /* TwitterClient.m in Sources */,
 				EB9DBD3E18E539FA0054D457 /* AppDelegate.m in Sources */,
 				EBEE9A5C18E87E720088D030 /* LoginViewController.m in Sources */,
+				497563111CB259D100900BB8 /* MHSTweet.m in Sources */,
 				EB9DBD3A18E539FA0054D457 /* main.m in Sources */,
 				EB9DBD6218E53BC50054D457 /* User.m in Sources */,
 				EB26124418F21977004FC7B9 /* MenuViewController.m in Sources */,

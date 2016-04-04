@@ -15,6 +15,7 @@
 #import "TwitterClient.h"
 #import "ProfileViewController.h"
 #import "MenuViewController.h"
+#import "MHSCoreDataStack.h"
 
 @interface TimelineViewController () <UIGestureRecognizerDelegate>
 
@@ -37,7 +38,7 @@
         self.title = @"Twitter";
         
         self.showMentions = NO;
-        //[self reload];
+        [self reload];
 
     }
     return self;
@@ -68,6 +69,11 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(refreshView) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
+    
+    
+   // MHSCoreDataStack *sharedCoreData = [MHSCoreDataStack sharedInstance];
+    [MHSCoreDataStack coreDataStackWithModelName:@"Model"];
+
 }
 
 #pragma mark - Table view data source

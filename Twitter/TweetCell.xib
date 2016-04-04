@@ -57,6 +57,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="vCe-gO-OwJ" secondAttribute="bottom" constant="18.5" id="gIM-bm-Q24"/>
                     <constraint firstItem="qby-sP-QGV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="gTY-4d-mTn"/>
                     <constraint firstItem="vCe-gO-OwJ" firstAttribute="top" secondItem="5vy-PX-zcR" secondAttribute="bottom" constant="2" id="mzd-qB-Rc5"/>
+                    <constraint firstItem="5vy-PX-zcR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5.5" id="vhY-R4-LdY"/>
                     <constraint firstItem="ypc-Qx-MV5" firstAttribute="centerY" secondItem="5vy-PX-zcR" secondAttribute="centerY" id="zfk-mT-wGO"/>
                 </constraints>
             </tableViewCellContentView>
