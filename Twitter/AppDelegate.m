@@ -174,7 +174,7 @@
         _menuViewController.toolbarHidden = NO;
         
         // Hide navigation bar
-        _menuViewController.navigationBarHidden = YES;
+        _menuViewController.navigationBarHidden = NO;
     }
     
     return _menuViewController;
@@ -182,7 +182,7 @@
 
 - (UIViewController *)currentViewController {
     if ([User currentUser]) {
-        return self.menuViewController;
+        return self.timelineViewController;
     }
     else {
         return self.loginViewController;
