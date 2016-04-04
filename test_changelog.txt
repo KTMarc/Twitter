@@ -2,3 +2,33 @@ Test Started
 Project running
     Twitter signIn OK.
 I Will continue tomorrow with the Core Data implementation.
+
+UI:
+-Navigation Controller Added: OK. (TODO: Had to do it getting rid of menuVC to make it work. The buttons of menuVC should be relocated in a tabBar because they are not accesible)
+-Push to navigate to click instead of modal presentation: Ok
+-UITableViewCells adapt to the correct size: Ok (made only with constraints)
+-Odd cells have different alginement that even cells. Not done. I can detect which are odd/even with the operation [tweets count] % 2 (0 means they are even, rest of results mean they are odd). Requieres Layout Constraints in code to do the different alignement in each case
+-Changed font of UITableViewCell and TweetVC: OK
+
+API:
+-Load more tweets automatically: OK
+TODO: Implementation should check for exisiting tweets in core data via the tweet_id.
+
+UI+API:
+-Add a search bar: Not Done.
+TODO:I would add a UISearchBar and its delegates. Then create a new API call (Example from twitter API:
+https://api.twitter.com/1.1/search/tweets.json?q=%40twitterapi)
+The right way to do it would be creating another Core Data Stack that we only use to get the list of matches while the user writes on the search field. Reactive COCOA could be a good framework to work on this. The keystrokes would be the signals that generate new requests.
+
+
+Core Data:
+-Created the model file for tweet.
+TODO: Should be created for User entity too.
+-Core Data Stack is not in App delegate. Singleton not done. It is not recommended by Apple. The instance should be ouside of the App delegate and passed between VCs.
+-Receiving the list of tweets and persisting to Core Data: Ok
+-Check for more tweets after reading from Core Data: Not Done.
+TODO: Use a flag once the tweets where successfully read from CORE DATA. This would be easy, but needs refactoring and not inserting duplicates.
+
+
+
+

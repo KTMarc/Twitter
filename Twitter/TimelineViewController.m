@@ -157,7 +157,7 @@
     
     if (indexPath.row == [self.tweets count] - 1)
     {
-        //[self loadMoreTweets];
+        [self loadMoreTweets];
     }
     return cell;
 }

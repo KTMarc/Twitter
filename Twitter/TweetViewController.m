@@ -78,7 +78,7 @@
 - (IBAction)onFavorite:(id)sender {
     NSLog(@"Favorite Button");
     
-    [[TwitterClient instance] favoriteWithTweetId:self.currentTweet.tweet_id success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] favoriteWithTweetId:(NSString *)self.currentTweet.tweet_id success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Favoriting success");
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Favoriting failure: Error: %@", error);
@@ -88,14 +88,14 @@
 - (IBAction)onReply:(id)sender {
     NSLog(@"Reply to post");
     NSString *status = [NSString stringWithFormat:@"%@ ", self.currentTweet.twitter_handle];
-    ComposeViewController *composeVC = [[ComposeViewController alloc] initWithNibName:@"ComposeViewController" andStatus:status  inReplyToTweetId:self.currentTweet.tweet_id bundle:nil];
+    ComposeViewController *composeVC = [[ComposeViewController alloc] initWithNibName:@"ComposeViewController" andStatus:status  inReplyToTweetId:(NSString *)self.currentTweet.tweet_id bundle:nil];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController: composeVC];
     [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (IBAction)onRetweet:(id)sender {
     NSLog(@"Retweeting");
-    [[TwitterClient instance] retweetWithTweetId:self.currentTweet.tweet_id success:^(AFHTTPRequestOperation *operation, id response) {
+    [[TwitterClient instance] retweetWithTweetId:(NSString *)self.currentTweet.tweet_id success:^(AFHTTPRequestOperation *operation, id response) {
         NSLog(@"Retweeting success!");
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
